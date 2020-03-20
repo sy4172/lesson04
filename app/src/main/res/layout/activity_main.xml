@@ -113,7 +113,7 @@
                     android:id="@+id/check3"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="5"
+                    android:layout_weight="3"
                     android:onClick="checkThird"
                     android:text="@string/check" />
 
@@ -183,7 +183,7 @@
                     android:id="@+id/check2"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="5"
+                    android:layout_weight="3"
                     android:onClick="checkSecond"
                     android:text="@string/check" />
 
@@ -253,7 +253,7 @@
                     android:id="@+id/check1"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="5"
+                    android:layout_weight="3"
                     android:onClick="checkFirst"
                     android:text="@string/check" />
 

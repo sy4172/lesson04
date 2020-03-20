@@ -29,9 +29,9 @@ public class MainActivity extends AppCompatActivity {
     ImageView iv1;
     ImageView iv2;
     ImageView iv3;
-    int i, j, amount, uAnswer, correct, sum, k, d;
+    int i, j, amount, uAnswer, correct, sum, k, d,  time;
     String str;
-    boolean flag2, flag3, toFill1, toFill2;
+    boolean flag2, flag3, flag1,next1,next2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         iv3 = findViewById(R.id.iv3);
         i = j = amount = uAnswer = correct = sum = k = d = 0;
         flag2 = flag3 = false;
-        toFill1 = toFill2 = true;
+        flag1 = next1 = next2 = true;
         i = (int) (Math.random() * 89) + 10;
         j = (int) (Math.random() * 89) + 10;
         k = (int) (Math.random() * 89) + 10;
@@ -67,9 +67,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void newGame(View view) {
-        correct = amount = sum = 0;
+        time = correct = amount = sum = 0;
         flag2 = flag3 = false;
-        toFill1 = toFill2 = true;
+        flag1 = next1 = next2 = true;
         i = (int) (Math.random() * 89) + 10;
         j = (int) (Math.random() * 89) + 10;
         k = (int) (Math.random() * 89) + 10;
@@ -86,42 +86,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkFirst(View view) {
-        str = et1.getText().toString();
-        if (str.equals("")) {
-            Toast.makeText(this, "Please enter a value", Toast.LENGTH_SHORT).show();
-            amount++;
-            iv1.setImageResource(R.drawable.x);
-        }
-        else{
-            uAnswer = Integer.parseInt(str);
-            sum = i + j;
-            if (uAnswer == sum) {
-                correct++;
-                amount++;
-                iv1.setImageResource(R.drawable.v);
-                flag2 = true;
-                tv3.setText(String.valueOf(sum));
-                if (toFill1) {
-                    tv4.setText(String.valueOf(k));
-                    sum += k;
-                    toFill1 = false;
-                }
-                else{
-                    tv4.setText(String.valueOf(k));
-                }
+        if (flag1){
+            str = et1.getText().toString();
+            if (str.equals("")) {
+                Toast.makeText(this, "Please enter a value", Toast.LENGTH_SHORT).show();
+                iv1.setImageResource(R.drawable.x);
             }
             else{
-                amount++;
-                iv1.setImageResource(R.drawable.x);
-                flag2 = true;
-                tv3.setText(String.valueOf(sum));
-                if (toFill1) {
+                uAnswer = Integer.parseInt(str);
+                sum = i + j;
+                if (uAnswer == sum) {
+                    iv1.setImageResource(R.drawable.v);
+                    tv3.setText(String.valueOf(sum));
                     tv4.setText(String.valueOf(k));
-                    sum += k;
-                    toFill1 = false;
+                    if (next1) {
+                        sum += k;
+                        flag2 = true;
+                    }
+                    next1  = false;
+                    amount ++;
+                    correct ++;
                 }
                 else{
+                    iv1.setImageResource(R.drawable.x);
+                    if (next1) {
+                        sum += k;
+                        flag2 = true;
+                    }
+                    next1 = false;
+                    tv3.setText(String.valueOf(sum));
                     tv4.setText(String.valueOf(k));
+                    sum += k;
+                    amount++;
                 }
             }
         }
@@ -129,68 +125,59 @@ public class MainActivity extends AppCompatActivity {
 
     public void checkSecond(View view) {
         if(flag2){
+            flag1 = false;
             str = et2.getText().toString();
             if (str.equals("")) {
-                Toast.makeText(this, "Please enter a value", Toast.LENGTH_LONG).show();
-                amount++;
+                Toast.makeText(this, "Please enter a value", Toast.LENGTH_SHORT).show();
                 iv2.setImageResource(R.drawable.x);
             }
-            else{
+            else {
                 uAnswer = Integer.parseInt(str);
                 if (uAnswer == sum) {
-                    correct++;
-                    amount++;
                     iv2.setImageResource(R.drawable.v);
-                    flag3 = true;
                     tv5.setText(String.valueOf(sum));
-                    if (toFill2) {
-                        tv6.setText(String.valueOf(d));
+                    tv6.setText(String.valueOf(d));
+                    if (next2) {
                         sum += d;
-                        toFill2 = false;
+                        flag3 = true;
                     }
-                    else{
-                        tv6.setText(String.valueOf(d));
-                    }
-                }
-                else{
-                    amount++;
+                    next2  = flag2 = false;
+                    amount ++;
+                    correct ++;
+                } else {
                     iv2.setImageResource(R.drawable.x);
-                    flag2 = true;
                     tv5.setText(String.valueOf(sum));
-                    if (toFill2) {
-                        tv6.setText(String.valueOf(d));
+                    tv6.setText(String.valueOf(d));
+                    if (next2) {
                         sum += d;
-                        toFill2 = false;
+                        flag3 = true;
                     }
-                    else{
-                        tv6.setText(String.valueOf(d));
-                    }
+                    next2 = flag2 = false;
+                    amount ++;
                 }
             }
         }
     }
 
     public void checkThird(View view) {
-        if(flag3){
+        if (flag3) {
+            flag2 = false;
             str = et3.getText().toString();
             if (str.equals("")) {
-                Toast.makeText(this, "Please enter a value", Toast.LENGTH_LONG).show();
-                amount++;
+                Toast.makeText(this, "Please enter a value", Toast.LENGTH_SHORT).show();
                 iv3.setImageResource(R.drawable.x);
-            }
-            else{
+            } else {
                 uAnswer = Integer.parseInt(str);
                 if (uAnswer == sum) {
                     correct++;
                     amount++;
                     iv3.setImageResource(R.drawable.v);
-                }
-                else{
+                } else {
                     amount++;
                     iv3.setImageResource(R.drawable.x);
                 }
             }
+            Toast.makeText(this, "Your score: " + (correct + "/" + amount), Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(this, "Your score: "+(correct/amount)*100+"%", Toast.LENGTH_SHORT).show();
     }
 }
