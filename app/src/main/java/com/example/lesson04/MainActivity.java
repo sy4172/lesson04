@@ -103,21 +103,20 @@ public class MainActivity extends AppCompatActivity {
                         sum += k;
                         flag2 = true;
                     }
-                    next1  = false;
+                    next1 = flag1 = false;
                     amount ++;
                     correct ++;
                 }
                 else{
+                    amount++;
                     iv1.setImageResource(R.drawable.x);
+                    tv3.setText(String.valueOf(sum));
+                    tv4.setText(String.valueOf(k));
                     if (next1) {
                         sum += k;
                         flag2 = true;
                     }
-                    next1 = false;
-                    tv3.setText(String.valueOf(sum));
-                    tv4.setText(String.valueOf(k));
-                    sum += k;
-                    amount++;
+                    next1  = flag1 = false;
                 }
             }
         }
@@ -134,26 +133,26 @@ public class MainActivity extends AppCompatActivity {
             else {
                 uAnswer = Integer.parseInt(str);
                 if (uAnswer == sum) {
-                    iv2.setImageResource(R.drawable.v);
-                    tv5.setText(String.valueOf(sum));
-                    tv6.setText(String.valueOf(d));
-                    if (next2) {
-                        sum += d;
-                        flag3 = true;
-                    }
-                    next2  = flag2 = false;
                     amount ++;
                     correct ++;
-                } else {
-                    iv2.setImageResource(R.drawable.x);
+                    iv2.setImageResource(R.drawable.v);
                     tv5.setText(String.valueOf(sum));
-                    tv6.setText(String.valueOf(d));
                     if (next2) {
                         sum += d;
                         flag3 = true;
                     }
+                    tv6.setText(String.valueOf(d));
                     next2 = flag2 = false;
+                } else {
                     amount ++;
+                    iv2.setImageResource(R.drawable.x);
+                    tv5.setText(String.valueOf(sum));
+                    if (next2) {
+                        sum += d;
+                        flag3 = true;
+                    }
+                    tv6.setText(String.valueOf(d));
+                    next2  = flag2 = false;
                 }
             }
         }
@@ -172,12 +171,16 @@ public class MainActivity extends AppCompatActivity {
                     correct++;
                     amount++;
                     iv3.setImageResource(R.drawable.v);
+                    flag3 = false;
                 } else {
                     amount++;
                     iv3.setImageResource(R.drawable.x);
+                    flag3 = false;
                 }
             }
-            Toast.makeText(this, "Your score: " + (correct + "/" + amount), Toast.LENGTH_SHORT).show();
+            if (!str.equals("")){
+                Toast.makeText(this, "Your score: "+(correct+"/"+amount), Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
