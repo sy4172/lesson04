@@ -13,22 +13,9 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button newGame;
-    Button check1;
-    Button check2;
-    Button check3;
-    TextView tv1;
-    TextView tv2;
-    TextView tv3;
-    TextView tv4;
-    TextView tv5;
-    TextView tv6;
-    EditText et1;
-    EditText et2;
-    EditText et3;
-    ImageView iv1;
-    ImageView iv2;
-    ImageView iv3;
+    TextView tv1,tv2,tv3,tv4,tv5,tv6;
+    EditText et1,et2,et3;
+    ImageView iv1,iv2,iv3;
     int i, j, amount, uAnswer, correct, sum, k, d,  time;
     String str;
     boolean flag2, flag3, flag1,next1,next2;
@@ -38,10 +25,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        newGame = findViewById(R.id.newGame);
-        check1 = findViewById(R.id.check1);
-        check2 = findViewById(R.id.check2);
-        check3 = findViewById(R.id.check3);
         tv1 = findViewById(R.id.tv1);
         tv2 = findViewById(R.id.tv2);
         tv3 = findViewById(R.id.tv3);
@@ -80,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
         tv4.setText("");
         tv5.setText("");
         tv6.setText("");
+        et1.setText("");
+        et2.setText("");
+        et3.setText("");
         iv1.setImageBitmap(null);
         iv2.setImageBitmap(null);
         iv3.setImageBitmap(null);
